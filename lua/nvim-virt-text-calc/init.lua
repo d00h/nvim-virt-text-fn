@@ -1,7 +1,7 @@
-local parsers = require("nvim-virt-text-fn.parsers")
-local selectors = require("nvim-virt-text-fn.selectors")
-local buildins = require("nvim-virt-text-fn.buildins")
-local render = require("nvim-virt-text-fn.render")
+local parsers = require("nvim-virt-text-calc.parsers")
+local selectors = require("nvim-virt-text-calc.selectors")
+local buildins = require("nvim-virt-text-calc.buildins")
+local render = require("nvim-virt-text-calc.render")
 
 local DEFAULT_MAPPING_CONFIG = {
   timedelta = buildins.timedelta(selectors.current_line),
@@ -9,7 +9,7 @@ local DEFAULT_MAPPING_CONFIG = {
   percent_todo = buildins.percent_todo(selectors.current_buffer),
 }
 local DEFAULT_RENDER_CONFIG = {
-  namespace = "virt-text-fn",
+  namespace = "virt-text-calc",
   virt_text_pos = "eol",
   virt_text_highlight = "Todo",
 }
@@ -19,7 +19,7 @@ local function echo(message, highlight)
 end
 
 local function create_virt_text_callback(opts)
-  local mapping_config = opts.mapping or DEFAULT_MAPPING_CONFIG
+  local mapping_config = vim.tbl_extend("keep", opts.mapping or {}, DEFAULT_MAPPING_CONFIG)
   local render_config = vim.tbl_extend("keep", opts.render or {}, DEFAULT_RENDER_CONFIG)
   local render = render.create_render(render_config)
 

@@ -5,15 +5,15 @@ if not string.find(package.path, vim.fn.getcwd()) then
 end
 
 -- =calc()
-package.loaded["nvim-virt-text-fn.parsers"] = nil
-package.loaded["nvim-virt-text-fn.buildins"] = nil
-package.loaded["nvim-virt-text-fn.selectors"] = nil
-package.loaded["nvim-virt-text-fn.render"] = nil
+package.loaded["nvim-virt-text-calc.parsers"] = nil
+package.loaded["nvim-virt-text-calc.buildins"] = nil
+package.loaded["nvim-virt-text-calc.selectors"] = nil
+package.loaded["nvim-virt-text-calc.render"] = nil
 
-local parsers = require("nvim-virt-text-fn.parsers")
-local selectors = require("nvim-virt-text-fn.selectors")
-local buildins = require("nvim-virt-text-fn.buildins")
-local render = require("nvim-virt-text-fn.render")
+local parsers = require("nvim-virt-text-calc.parsers")
+local selectors = require("nvim-virt-text-calc.selectors")
+local buildins = require("nvim-virt-text-calc.buildins")
+local render = require("nvim-virt-text-calc.render")
 
 local mapping = {
   timedelta = buildins.timedelta(selectors.current_line),
@@ -21,7 +21,7 @@ local mapping = {
 }
 
 local render = render.create_render({
-  namespace = "vir-text-fn",
+  namespace = "vir-text-calc",
   virt_text_pos = "eol",
   virt_text_highlight = "Todo",
 })

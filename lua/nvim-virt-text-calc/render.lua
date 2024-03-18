@@ -1,5 +1,5 @@
 local function create_render(opts)
-  local namespace = opts.namespace or "nvim-virt-text-fn"
+  local namespace = opts.namespace or "nvim-virt-text-calc"
   local virt_text_pos = opts.virt_text_pos or "eol"
   local virt_text_highlight = opts.virt_text_highlight or "Error"
 

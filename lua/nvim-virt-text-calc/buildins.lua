@@ -1,4 +1,4 @@
-local parsers = require("nvim-virt-text-fn.parsers")
+local parsers = require("nvim-virt-text-calc.parsers")
 
 local function timedelta(selector)
   return function(bufnr, row)

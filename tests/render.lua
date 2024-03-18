@@ -3,9 +3,9 @@ if not string.find(package.path, vim.fn.getcwd()) then
   package.path = package.path .. ";" .. vim.fn.getcwd() .. "/lua/?.lua"
 end
 
-package.loaded["nvim-virt-text-fn.render"] = nil
+package.loaded["nvim-virt-text-calc.render"] = nil
 
-local create_render = require("nvim-virt-text-fn.render").create_render
+local create_render = require("nvim-virt-text-calc.render").create_render
 
 local items = {
   { text = "hello10", line = 10 },

@@ -3,9 +3,9 @@ if not string.find(package.path, vim.fn.getcwd()) then
   package.path = package.path .. ";" .. vim.fn.getcwd() .. "/lua/?.lua"
 end
 
-package.loaded["nvim-virt-text-fn.parser"] = nil
+package.loaded["nvim-virt-text-calc.parsers"] = nil
 
-local parse_functions = require("nvim-virt-text-fn.parser").parse_functions
+local parse_functions = require("nvim-virt-text-calc.parsers").parse_functions
 
 vim.cmd("messages clear")
 
