@@ -6,6 +6,7 @@ local render = require("nvim-virt-text-fn.render")
 local DEFAULT_MAPPING_CONFIG = {
   timedelta = buildins.timedelta(selectors.current_line),
   count_todo = buildins.count_todo(selectors.current_buffer),
+  percent_todo = buildins.percent_todo(selectors.current_buffer),
 }
 local DEFAULT_RENDER_CONFIG = {
   namespace = "virt-text-fn",

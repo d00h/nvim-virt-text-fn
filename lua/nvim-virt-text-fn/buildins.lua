@@ -33,7 +33,28 @@ local function count_todo(selector)
   end
 end
 
+local function percent_todo(selector)
+  return function(bufnr, row)
+    local pattern = "^- %[([%sx])%]"
+    local total, done = 0, 0
+    for _, text in ipairs(selector(bufnr, row)) do
+      for found in parsers.parse_todo(text) do
+        total = total + 1
+        if found == "x" then
+          done = done + 1
+        end
+      end
+    end
+    if total == 0 then
+      return "0%"
+    else
+      return string.format("%d%%", done * 100 / total)
+    end
+  end
+end
+
 return {
   timedelta = timedelta,
   count_todo = count_todo,
+  percent_todo = percent_todo,
 }
