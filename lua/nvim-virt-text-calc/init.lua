@@ -30,8 +30,14 @@ local function create_virt_text_callback(opts)
       local items = {}
       for _, fn in ipairs(parsers.parse_functions_in_viewpoint(win)) do
         local handler = mapping_config[fn.name]
+        local text
+        if handler == nil then
+          text = string.format("unknown function '%s'", fn.name)
+        else
+          local _, ret = pcall(handler, bufnr, fn.line)
+          text = ret
+        end
 
-        local _, ret = pcall(handler, bufnr, fn.line)
         table.insert(items, { text = ret, line = fn.line })
       end
       render(bufnr, items)
@@ -41,7 +47,6 @@ end
 
 local function setup(opts)
   local virt_text_callback = create_virt_text_callback(opts)
-
   local filetypes = opts.filetypes or { "markdown" }
 
   vim.api.nvim_create_autocmd("FileType", {
