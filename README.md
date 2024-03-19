@@ -34,17 +34,18 @@ plugin.register({
     url = "d00h/nvim-virt-text-calc",
     config = function()
         local buildins =  require("nvim-virt-text-calc.buildins")
-        local selectors =  require("nvim-virt-text-calc.selectors")
         
         require("nvim-virt-text-calc").setup({
           filetypes = { "markdown" },
           mapping = {
-              timedelta = buildins.timedelta(selectors.current_line),
-              count_todo = buildins.count_todo(selectors.current_paragraph),
-              percent_todo = buildins.percent_todo(selectors.current_paragraph),
+              -- list of functions
+              timedelta = buildins.timedelta,
+              count_todo = buildins.count_todo,
+              percent_todo = buildins.percent_todo,
               proba = proba_calc, -- you can write =proba()
           },
           render = {
+              -- parameters of vim.api.nvim_buf_set_extmark
               namespace = "virt-text-calc",
               virt_text_pos = "eol",
               virt_text_highlight = "Todo",
