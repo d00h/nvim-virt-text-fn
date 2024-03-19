@@ -34,7 +34,12 @@ local function parse_functions_in_viewpoint(win)
   local result = {}
   for delta, text in ipairs(lines) do
     for fn in parse_functions(text) do
-      table.insert(result, { line = first_line + delta - 1, name = fn.name, args = fn.args })
+      table.insert(result, {
+        bufnr = bufnr,
+        line = first_line + delta - 1,
+        name = fn.name,
+        args = fn.args,
+      })
     end
   end
   return result

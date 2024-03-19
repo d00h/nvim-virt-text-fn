@@ -1,3 +1,4 @@
+
 # Summary 
 
 An attempt to make something more useful out of the mechanism of virtual text.
@@ -23,8 +24,10 @@ plugin.register({
 Or a bit more complex:
 
 ```lua
-local function proba_calc(bufnr, row)
-   return "42"
+local function proba_calc(args)
+   return function(bufnr, row)
+       return "42"
+   end
 end
 
 plugin.register({
@@ -39,7 +42,7 @@ plugin.register({
               timedelta = buildins.timedelta(selectors.current_line),
               count_todo = buildins.count_todo(selectors.current_paragraph),
               percent_todo = buildins.percent_todo(selectors.current_paragraph),
-              proba = proba_calc, -- you can write =proba() 
+              proba = proba_calc, -- you can write =proba()
           },
           render = {
               namespace = "virt-text-calc",
@@ -56,4 +59,3 @@ plugin.register({
 1. Find something similar to =func() in the text.
 2. Look for the name func in mapping.
 3. If it exists, execute it and display the result in virtual text.
-
