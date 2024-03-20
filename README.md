@@ -68,3 +68,4 @@ plugin.register({
 | timedelta    | count days to now                   | 24-02-2022 =timedelta() 754 days |
 | count_todo   | count markdown todos in the section | =count_todo() 1 of 2             |
 | percent_todo |                                     | =percent_todo()  50%             |
+| sum          | sum all integers in the section     | 1 2 =sum()  2                    |
