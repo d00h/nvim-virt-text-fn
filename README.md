@@ -60,3 +60,11 @@ plugin.register({
 1. Find something similar to =func() in the text.
 2. Look for the name func in mapping.
 3. If it exists, execute it and display the result in virtual text.
+
+# Buildin functions
+
+| function     | action                              | sample                           |
+|--------------|-------------------------------------|----------------------------------|
+| timedelta    | count days to now                   | 24-02-2022 =timedelta() 754 days |
+| count_todo   | count markdown todos in the section | =count_todo() 1 of 2             |
+| percent_todo |                                     | =percent_todo()  50%             |
