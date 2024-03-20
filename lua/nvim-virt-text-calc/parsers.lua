@@ -15,7 +15,7 @@ local function parse_functions(text)
       for word in string.gmatch(found_args, "[^%,]+") do
         table.insert(args, word)
       end
-      last_pos = found_end or #text
+      last_pos = found_end + 1
       return {
         ["name"] = found_name,
         ["args"] = args,
@@ -58,7 +58,7 @@ local function parse_datetime(text)
       last_pos = #text
       return nil
     end
-    last_pos = found_end
+    last_pos = found_end + 1
 
     value1, value2, value3 = tonumber(value1), tonumber(value2), tonumber(value3)
     if value1 >= 1 and value1 <= 31 and value2 >= 1 and value2 <= 12 and value3 >= 1970 then
@@ -90,8 +90,22 @@ local function parse_todo(text)
       last_pos = #text
       return nil
     end
-    last_pos = found_end
+    last_pos = found_end + 1
     return value
+  end
+end
+
+local function parse_integers(text)
+  local pattern = "([%-]?%d+)"
+  local last_pos = 0
+  return function()
+    local found_start, found_end, value = string.find(text, pattern, last_pos)
+    if found_start == nil then
+      last_pos = #text
+      return nil
+    end
+    last_pos = found_end + 1
+    return tonumber(value)
   end
 end
 
@@ -100,4 +114,5 @@ return {
   parse_functions_in_viewpoint = parse_functions_in_viewpoint,
   parse_datetime = parse_datetime,
   parse_todo = parse_todo,
+  parse_integers = parse_integers,
 }

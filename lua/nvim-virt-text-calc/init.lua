@@ -1,3 +1,4 @@
+
 local parsers = require("nvim-virt-text-calc.parsers")
 local buildins = require("nvim-virt-text-calc.buildins")
 local render = require("nvim-virt-text-calc.render")
@@ -6,6 +7,7 @@ local DEFAULT_MAPPING_CONFIG = {
   timedelta = buildins.timedelta,
   count_todo = buildins.count_todo,
   percent_todo = buildins.percent_todo,
+  sum = buildins.sum,
 }
 local DEFAULT_RENDER_CONFIG = {
   namespace = "virt-text-calc",

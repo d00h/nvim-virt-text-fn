@@ -48,6 +48,16 @@ local function percent_todo(lines)
   end
 end
 
+local function sum_integers(lines)
+  local result = 0
+  for _, text in ipairs(lines) do
+    for value in parsers.parse_integers(text) do
+      result = result + value
+    end
+  end
+  return tostring(result)
+end
+
 local function wrap(fn, selector)
   return function(args)
     return function(bufnr, row)
@@ -59,6 +69,7 @@ end
 
 return {
   timedelta = wrap(timedelta, selectors.current_line),
-  count_todo = wrap(count_todo, selectors.current_paragraph),
-  percent_todo = wrap(percent_todo, selectors.current_paragraph),
+  count_todo = wrap(count_todo, selectors.current_section),
+  percent_todo = wrap(percent_todo, selectors.current_section),
+  sum = wrap(sum_integers, selectors.current_section),
 }

@@ -1,29 +1,41 @@
+local function index_prev_pattern(pattern, bufnr, row)
+  local count = vim.api.nvim_buf_line_count(bufnr)
+
+  while row >= 0 and row < count do
+    local lines = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)
+    local match = string.match(lines[1], pattern)
+    if match then
+      return row
+    end
+    row = row - 1
+  end
+end
+
+local function index_next_pattern(pattern, bufnr, row)
+  local count = vim.api.nvim_buf_line_count(bufnr)
+
+  while row >= 0 and row < count do
+    local lines = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)
+    local match = string.match(lines[1], pattern)
+    if match then
+      return row
+    end
+    row = row + 1
+  end
+end
+
 local function find_current_line(bufnr, row)
   return vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)
 end
 
 local function find_section(bufnr, row)
-  local count = vim.api.nvim_buf_line_count(bufnr)
+  local pattern = "^([%#]+)%s+"
+  local start_row = index_prev_pattern(pattern, bufnr, row) or 0
+  local end_row = index_next_pattern(pattern, bufnr, start_row + 1)
+    or vim.api.nvim_buf_line_count(bufnr)
 
-  local start_row = row
-  while start_row > 0 do
-    local lines = vim.api.nvim_buf_get_lines(bufnr, start_row, start_row + 1, false)
-    local match = string.match("^([%#]+)%s+", lines[1])
-    if match then
-      break
-    end
-    start_row = start_row - 1
-  end
+  print(start_row, end_row)
 
-  local end_row = row + 1
-  while end_row < count do
-    local lines = vim.api.nvim_buf_get_lines(bufnr, end_row, end_row + 1, false)
-    local match = string.match("^([%#]+)%s+", lines[1])
-    if match then
-      break
-    end
-    end_row = end_row + 1
-  end
   return vim.api.nvim_buf_get_lines(bufnr, start_row, end_row, false)
 end
 
